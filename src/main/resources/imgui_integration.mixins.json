@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.tympanic.imgui_integration.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinBlockGame",
+    "MixinGameState"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

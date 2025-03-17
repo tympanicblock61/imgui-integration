@@ -1,0 +1,51 @@
+plugins {
+    id "java"
+    id "jigsaw"
+    id "com.github.johnrengelman.shadow"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    cosmicReach("finalforeach:cosmicreach-alpha:${cosmic_reach_version}")
+    implementation "io.github.spair:imgui-java-binding:${imgui_version}"
+    implementation "io.github.spair:imgui-java-lwjgl3:${imgui_version}"
+    implementation "io.github.spair:imgui-java-natives-linux:${imgui_version}"
+    implementation "io.github.spair:imgui-java-natives-macos:${imgui_version}"
+    implementation "io.github.spair:imgui-java-natives-windows:${imgui_version}"
+}
+
+processResources {
+    def resourceTargets = [ "puzzle.mod.json" ]
+
+    def replaceProperties = [
+            "mod_version"     : version,
+            "mod_desc"       : desc,
+            "mod_name"        : project.name,
+            "mod_id"          : id,
+            "cosmic_reach_ver": cosmic_reach_version,
+            "puzzle_loader_ver": puzzle_loader_version
+    ]
+
+    inputs.properties replaceProperties
+    replaceProperties.put "project", project
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+}
+
+shadowJar {
+    archiveBaseName.set(project.name +"-"+project.cosmic_reach_version)
+    archiveVersion.set(version)
+    archiveClassifier.set('')
+    mergeServiceFiles() // Merges service files from dependencies
+    dependencies {
+        include(dependency("io.github.spair:imgui-java-binding"))
+        include(dependency("finalforeach:cosmicreach-alpha"))
+    }
+}

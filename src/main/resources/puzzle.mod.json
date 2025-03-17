@@ -1,0 +1,27 @@
+{
+  "formatVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_desc}",
+  "authors": [
+    "Tympanicblock61"
+  ],
+  "meta": {
+    "icon": "${mod_id}:icons/icon.png"
+  },
+  "entrypoints": {
+    "client_init": [
+      "org.tympanic.imgui_integration.ClientInitializer"
+    ]
+  },
+  "mixins": [
+    "imgui_integration.mixins.json"
+  ],
+  "depends": {
+    "cosmic-reach": ">=${cosmic_reach_ver}",
+    "puzzle-loader": ">=${puzzle_loader_ver}"
+  },
+  "accessTransformers": [
+  ]
+}
