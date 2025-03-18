@@ -1,7 +1,9 @@
 package org.tympanic.imgui_integration.mixins;
 
+import com.github.puzzle.game.engine.ClientGameLoader;
 import finalforeach.cosmicreach.gamestates.GameState;
 import finalforeach.cosmicreach.gamestates.MainMenu;
+import finalforeach.cosmicreach.gamestates.PrealphaPreamble;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +18,7 @@ public class MixinGameState {
 
     @Inject(method = "create", at = @At(value = "TAIL"))
     public void create(CallbackInfo callbackInfo) {
-        if (_this instanceof MainMenu && !ImGuiManager.INSTANCE.hasBeenInitialized) {
+        if ((_this instanceof ClientGameLoader || _this instanceof PrealphaPreamble) && !ImGuiManager.INSTANCE.hasBeenInitialized) {
             ImGuiManager.INSTANCE.init();
         }
     }

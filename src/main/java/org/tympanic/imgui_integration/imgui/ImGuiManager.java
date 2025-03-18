@@ -32,9 +32,6 @@ public class ImGuiManager {
             io.getFonts().build();
             imGuiGlfw.init(windowHandle, true);
             imGuiGl3.init("#version 150");
-            int major = GL32.glGetInteger(GL32.GL_MAJOR_VERSION);
-            int minor = GL32.glGetInteger(GL32.GL_MINOR_VERSION);
-            System.out.println("OpenGL Version: " + major + "." + minor);
             hasBeenInitialized = true;
         }
     }

@@ -46,6 +46,7 @@ shadowJar {
     mergeServiceFiles() // Merges service files from dependencies
     dependencies {
         include(dependency("io.github.spair:imgui-java-binding"))
+        include(dependency("io.github.spair:imgui-java-lwjgl3"))
         include(dependency("finalforeach:cosmicreach-alpha"))
     }
 }

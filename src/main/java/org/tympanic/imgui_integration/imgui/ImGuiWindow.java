@@ -12,12 +12,6 @@ public abstract class ImGuiWindow {
     public boolean hasBeenInitialized = false;
 
     public void renderIn(Class<? extends GameState> state) {
-        if (state == ClientGameLoader.class) {
-            throw new RuntimeException("ImGuiWindow cannot be rendered in "+ClientGameLoader.class.getCanonicalName() +" because it causes a wmic error");
-        }
-        if (state == PrealphaPreamble.class) {
-            throw new RuntimeException("ImGuiWindow cannot be rendered in "+PrealphaPreamble.class.getCanonicalName() +" because it causes a wmic error");
-        }
         renderIn.add(state);
     }
 
