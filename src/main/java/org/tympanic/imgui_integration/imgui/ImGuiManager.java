@@ -61,6 +61,18 @@ public class ImGuiManager {
         end();
     }
 
+    public void tick() {
+        for (ImGuiWindow window : windows) {
+            if (!window.hasBeenInitialized) {
+                window.init();
+                window.hasBeenInitialized = true;
+            }
+            if (window.rendersIn(GameState.currentGameState.getClass()) || window.rendersIn(GameState.class)) {
+                window.tick();
+            }
+        }
+    }
+
     public void end() {
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());

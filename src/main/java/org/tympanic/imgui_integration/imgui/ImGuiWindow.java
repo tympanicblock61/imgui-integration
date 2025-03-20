@@ -10,6 +10,7 @@ import java.util.List;
 public abstract class ImGuiWindow {
     private List<Class<? extends GameState>> renderIn = new ArrayList<>();
     public boolean hasBeenInitialized = false;
+    public GameState ownState = null;
 
     public void renderIn(Class<? extends GameState> state) {
         renderIn.add(state);
@@ -21,5 +22,18 @@ public abstract class ImGuiWindow {
 
     public abstract void init();
     public abstract void render();
+    public abstract void tick();
     public abstract void dispose();
+
+    public boolean hasOwnGamestate() {
+        return ownState != null && rendersIn(ownState.getClass());
+    }
+
+    public void display() {
+        if (!hasBeenInitialized) {
+            init();
+            hasBeenInitialized = true;
+        }
+        if (hasOwnGamestate()) GameState.switchToGameState(ownState);
+    }
 }
